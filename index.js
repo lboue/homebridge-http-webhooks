@@ -812,6 +812,13 @@ function HttpWebHookThermostatAccessory(log, thermostatConfig, storage) {
   this.setTargetHeatingCoolingStateURL = thermostatConfig["set_target_heating_cooling_state_url"] || "";
   this.setTargetHeatingCoolingStateMethod = thermostatConfig["set_target_heating_cooling_state_method"] || "GET";
   this.storage = storage;
+  
+  this.informationService = new Service.AccessoryInformation();
+  this.informationService
+    .setCharacteristic(Characteristic.Manufacturer, 'Thermostat')
+    .setCharacteristic(Characteristic.Model, 'Thermostat')
+    .setCharacteristic(Characteristic.SerialNumber, '123456')
+    .setCharacteristic(Characteristic.FirmwareRevision, '1.0');
 
   this.service = new Service.Thermostat(this.name);
   this.changeCurrentTemperatureHandler = (function(newTemp) {
